@@ -28,6 +28,7 @@ class TestProvider extends ServiceProvider
     {
 
         if ($this->app->runningInConsole()) {
+
             // if (!class_exists('CreatePostsTable')) {
             //     $this->publishes([
             //         base_path() . '/vendor/jerickcm/migrate/database/stub/create_posts_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_posts_table.php'),
@@ -36,12 +37,12 @@ class TestProvider extends ServiceProvider
 
             if (!class_exists('CreateMobilephonesTable')) {
                 $this->publishes([
-                    base_path() . '/vendor/jerickcm/migrate/database/stub/create_mobilephones_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_create_mobilephones_table.php'),
+                    base_path() . '/vendor/jerickcm/yeastartg200/database/stub/create_mobilephones_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_create_mobilephones_table.php'),
                 ], 'migrations');
             }
 
             $this->publishes([
-                base_path() . '/vendor/jerickcm/migrate/database/seeders/SimcardSeeder.php' => database_path('seeders/SimcardSeeder.php'),
+                base_path() . '/vendor/jerickcm/yeastartg200/database/seeders/SimcardSeeder.php' => database_path('seeders/SimcardSeeder.php'),
             ], 'seeds');
 
         }

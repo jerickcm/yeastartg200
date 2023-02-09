@@ -1,6 +1,5 @@
-php artisan vendor:publish --provider="Jerickcm\Migrate\TestProvider" --tag="migrations"
-
- php artisan vendor:publish --provider="Jerickcm\Migrate\Providers\TestProvider" --tag="migrations"
+php artisan vendor:publish --provider="Jerickcm\Yeastartg200\TestProvider" --tag="migrations"
+php artisan vendor:publish --provider="Jerickcm\Yeastartg200\Providers\TestProvider" --tag="migrations"
 
 implement composer dump-autoload
 

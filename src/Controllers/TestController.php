@@ -3,12 +3,29 @@
 namespace Jerickcm\Yeastartg200\Controllers;
 
 use Illuminate\Http\Request;
+use Jerickcm\Yeastartg200\Models\Mobilephone;
 
 class TestController
 {
-    public function index()
+    public function create()
     {
-        dd("hello");
+        dd("hello test run");
+    }
+
+    public function sending(Request $request)
+    {
+        $data = [
+            'title' => $request['title'],
+            'message' => $request['message'],
+            'contact_number' => $request['contact_number']
+        ];
+
+        $return = $this->multiple_sms_module($data);
+
+        return response()->json([
+            'sent' => $return,
+            'success' => true,
+        ]);
     }
 
     public function multiple_sms_module($data)
@@ -39,16 +56,8 @@ class TestController
         $transmission = "http://" . $SMS_gateway . "/cgi/WebCGI?1500101=account=" . $SMS_gateway_account . "&password=" . $SMS_gateway_password_encoded . "&port=" . $channel . "&destination=" . $SMS_destination . "&content=" . $SMS_message_encoded;
         curl_setopt($ch, CURLOPT_URL, $transmission);
 
-        // if ($debug == 'on') {
-        //     echo '<hr>' . $transmission . '<hr>';
-        // }
-
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $SMS_result = curl_exec($ch);
-
-        // if ($debug == 'on') {
-        //     echo $SMS_result . '<hr>';
-        // }
 
         if ((strpos($SMS_result, 'Response: Success') !== false) && ((strpos($SMS_result, 'Message: Commit successfully!') !== false))) {
             $SMS_success = 'YES';
@@ -95,5 +104,4 @@ class TestController
             return "others";
         }
     }
-
 }

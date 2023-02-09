@@ -1,0 +1,10 @@
+echo "/vendor/" > .gitignore
+git init
+git checkout -b master
+git add .
+git commit -m "Initial commit"
+git tag 1.0.1
+
+git remote add origin git@github.com:jerickcm/migrate.git
+git push -u origin --all
+git push -u origin --tags

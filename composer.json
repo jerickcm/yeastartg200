@@ -1,0 +1,17 @@
+{
+    "name": "jerickcm/yeastartg200",
+    "description": "Implement sms module",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Jerickcm\\Yeastartg200\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jerick-CM",
+            "email": "jmangaluz@gmail.com"
+        }
+    ],
+    "require": {}
+}

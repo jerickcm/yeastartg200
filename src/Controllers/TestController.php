@@ -5,6 +5,7 @@ namespace Jerickcm\Yeastartg200\Controllers;
 use Illuminate\Http\Request;
 use Jerickcm\Yeastartg200\Models\Mobilephone;
 
+
 class TestController
 {
     public function create()
@@ -23,7 +24,11 @@ class TestController
         $return = $this->multiple_sms_module($data);
 
         return response()->json([
-            'sent' => $return,
+            'title' => $request['title'],
+            'message' => $request['message'],
+            'contact_number' => $request['contact_number'],
+            'sent' => $return['success'],
+            'returndata' => $return,
             'success' => true,
         ]);
     }
@@ -66,12 +71,16 @@ class TestController
         }
 
         curl_close($ch);
-
+        $data['telco'] = $mobilecompany;
         if ($SMS_success == 'YES') {
-            return true;
+            $data['success'] = true;
+            return $data;
+            // return true;
             // echo '<h1 align="center">SMS SENT</h1>';
         } else {
-            return false;
+            $data['success'] = false;
+            return $data;
+            // return false;
             // echo '<h1 align="center">SMS FAIL</h1>';
         }
     }
@@ -103,5 +112,8 @@ class TestController
         } else {
             return "others";
         }
+
+
+
     }
 }

@@ -5,8 +5,7 @@ namespace Jerickcm\Yeastartg200\Controllers;
 use Illuminate\Http\Request;
 use Jerickcm\Yeastartg200\Models\Mobilephone;
 
-
-class TestController
+class SendController
 {
     public function create()
     {
@@ -16,7 +15,6 @@ class TestController
     public function sending(Request $request)
     {
         $data = [
-            'title' => $request['title'],
             'message' => $request['message'],
             'contact_number' => $request['contact_number']
         ];
@@ -24,10 +22,10 @@ class TestController
         $return = $this->multiple_sms_module($data);
 
         return response()->json([
-            'title' => $request['title'],
             'message' => $request['message'],
             'contact_number' => $request['contact_number'],
             'sent' => $return['success'],
+            'telco' => $return['telco'],
             'returndata' => $return,
             'success' => true,
         ]);
@@ -46,7 +44,7 @@ class TestController
         $channel = '1'; // 1 or 2 sim channe 1 and 2 for Yeastar TG200
         $mobilecompany = $this->mobilecompany($SMS_destination);
 
-        if ($mobilecompany == "smart") {
+        if ($mobilecompany == "smart" || $mobilecompany == "sun") {
             $channel = '2'; //Smart channel
         } else {
             $channel = '1'; //Globe channel
@@ -71,18 +69,14 @@ class TestController
         }
 
         curl_close($ch);
+        $data['simchannel'] = $channel;
         $data['telco'] = $mobilecompany;
         if ($SMS_success == 'YES') {
             $data['success'] = true;
-            return $data;
-            // return true;
-            // echo '<h1 align="center">SMS SENT</h1>';
         } else {
             $data['success'] = false;
-            return $data;
-            // return false;
-            // echo '<h1 align="center">SMS FAIL</h1>';
         }
+        return $data;
     }
 
     public function mobilecompany($mobile_number)
@@ -112,8 +106,6 @@ class TestController
         } else {
             return "others";
         }
-
-
 
     }
 }

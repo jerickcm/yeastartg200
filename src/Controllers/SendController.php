@@ -35,10 +35,11 @@ class SendController
     {
 
         $debug = 'on';
-        $SMS_gateway_account = 'apiuser';
+        $SMS_gateway_account = 'apiuser1';
         // $SMS_gateway_password = 'apipass';
-        $SMS_gateway_password = 'apipass';
-        $SMS_gateway = '192.168.5.150';
+        $SMS_gateway_password = 'apipass1';
+        // $SMS_gateway = '192.168.5.150';
+        $SMS_gateway = '210.5.93.218';
         $SMS_source = '09776229501'; // sender SIM
         $SMS_destination = $data['contact_number'];
         $channel = '1'; // 1 or 2 sim channe 1 and 2 for Yeastar TG200

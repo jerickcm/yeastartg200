@@ -34,7 +34,6 @@ class SendController
             'contact_number' => $request['contact_number'],
             'telco' => $return['telco'],
             'simchannel' => $return['simchannel'],
-            'returndata' => $return,
             'success' => $return['success'],
             'request_done' => true,
             '_benchmark' => microtime(true) -  $this->time_start

@@ -28,7 +28,6 @@ class SendController
         ];
 
         $return = $this->multiple_sms_module($data);
-
         return response()->json([
             'message' => $request['message'],
             'contact_number' => $request['contact_number'],

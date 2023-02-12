@@ -7,6 +7,14 @@ use Jerickcm\Yeastartg200\Models\Mobilephone;
 
 class SendController
 {
+
+    public $time_start;
+
+    public function __construct()
+    {
+        $this->time_start = microtime(true);
+    }
+
     public function create()
     {
         dd("hello test run");
@@ -24,10 +32,12 @@ class SendController
         return response()->json([
             'message' => $request['message'],
             'contact_number' => $request['contact_number'],
-            'sent' => $return['success'],
             'telco' => $return['telco'],
+            'simchannel' => $return['simchannel'],
             'returndata' => $return,
-            'success' => true,
+            'success' => $return['success'],
+            'request_done' => true,
+            '_benchmark' => microtime(true) -  $this->time_start
         ]);
     }
 
@@ -37,7 +47,7 @@ class SendController
         $debug = 'on';
         $SMS_gateway_account = 'apiuser1';
         // $SMS_gateway_password = 'apipass';
-        $SMS_gateway_password = 'apipass1';
+        $SMS_gateway_password = 'apip@ss021123';
         // $SMS_gateway = '192.168.5.150';
         $SMS_gateway = '210.5.93.218';
         $SMS_source = '09776229501'; // sender SIM
@@ -107,6 +117,5 @@ class SendController
         } else {
             return "others";
         }
-
     }
 }

@@ -4,7 +4,7 @@ namespace Jerickcm\Yeastartg200\Controllers;
 
 use Illuminate\Http\Request;
 use Jerickcm\Yeastartg200\Models\Mobilephone;
-
+use Config;
 class SendController
 {
 
@@ -43,11 +43,11 @@ class SendController
     {
 
         $debug = 'on';
-        // $SMS_gateway_account = config('custom.yeastar_api_user');
-        // $SMS_gateway_password = config('custom.yeastar_api_password');
+        $SMS_gateway_account = config('custom.yeastar_api_user');
+        $SMS_gateway_password = config('custom.yeastar_api_password');
 
-        $SMS_gateway_account = 'apiuser1';
-        $SMS_gateway_password = 'apip@ss021123';
+        // $SMS_gateway_account = 'apiuser1';
+        // $SMS_gateway_password = 'apip@ss021123';
 
         $SMS_gateway = '210.5.93.218';
         $SMS_source = '09776229501'; // sender SIM

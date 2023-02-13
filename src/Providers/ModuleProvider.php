@@ -16,7 +16,7 @@ class ModuleProvider extends ServiceProvider
 
     public function register()
     {
-
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'smsmodulepackage');
     }
 
     public function publishResources()
@@ -33,6 +33,10 @@ class ModuleProvider extends ServiceProvider
             $this->publishes([
                 base_path() . '/vendor/jerickcm/yeastartg200/database/seeders/SimcardSeeder.php' => database_path('seeders/SimcardSeeder.php'),
             ], 'seeds');
+
+            $this->publishes([
+                __DIR__.'/../config/config.php' => config_path('smsmodulepackage.php'),
+              ], 'config');
 
         }
 

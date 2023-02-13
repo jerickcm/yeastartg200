@@ -16,7 +16,7 @@ class ModuleProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'smsmodulepackage');
+        $this->mergeConfigFrom(base_path() . '/vendor/jerickcm/yeastartg200/config/config.php', 'smsmodulepackage');
     }
 
     public function publishResources()

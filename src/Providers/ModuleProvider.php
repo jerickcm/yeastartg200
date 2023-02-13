@@ -35,7 +35,7 @@ class ModuleProvider extends ServiceProvider
             ], 'seeds');
 
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('smsmodulepackage.php'),
+                base_path() . '/vendor/jerickcm/yeastartg200/config/config.php' => config_path('smsmodulepackage.php'),
               ], 'config');
 
         }

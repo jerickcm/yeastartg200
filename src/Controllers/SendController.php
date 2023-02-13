@@ -46,9 +46,6 @@ class SendController
         $SMS_gateway_account = config('custom.yeastar_api_user');
         $SMS_gateway_password = config('custom.yeastar_api_password');
 
-        // $SMS_gateway_account = 'apiuser1';
-        // $SMS_gateway_password = 'apip@ss021123';
-
         $SMS_gateway = '210.5.93.218';
         $SMS_source = '09776229501'; // sender SIM
         $SMS_destination = $data['contact_number'];

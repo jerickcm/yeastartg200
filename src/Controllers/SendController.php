@@ -4,7 +4,9 @@ namespace Jerickcm\Yeastartg200\Controllers;
 
 use Illuminate\Http\Request;
 use Jerickcm\Yeastartg200\Models\Mobilephone;
+use Jerickcm\Yeastartg200\Models\SmsLog;
 use Config;
+
 class SendController
 {
 
@@ -28,14 +30,28 @@ class SendController
         ];
 
         $return = $this->multiple_sms_module($data);
+
+        $benchmarktime =  microtime(true) -  $this->time_start;
+
+        SmsLog::create([
+            'reference_id' => $request['reference_id'],
+            'message' => $request['message'],
+            'contact_number' => $request['contact_number'],
+            'telco' =>  $return['telco'],
+            'simchannel' => $return['simchannel'],
+            'sent' => $return['success'],
+            'benchmark' => $benchmarktime,
+        ]);
+
         return response()->json([
+            'reference_id' => $request['reference_id'],
             'message' => $request['message'],
             'contact_number' => $request['contact_number'],
             'telco' => $return['telco'],
             'simchannel' => $return['simchannel'],
             'success' => $return['success'],
             'request_done' => true,
-            '_benchmark' => microtime(true) -  $this->time_start
+            '_benchmark' =>  $benchmarktime
         ]);
     }
 

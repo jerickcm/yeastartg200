@@ -13,7 +13,7 @@ class SmsLog extends Model
     public $timestamps = true;
     protected $fillable = [
         'id',
-        'areacode',
+        'reference_id',
         'telco',
         'simchannel',
         'contact_number',
@@ -21,5 +21,4 @@ class SmsLog extends Model
         'sent',
         'benchmark',
     ];
-
 }

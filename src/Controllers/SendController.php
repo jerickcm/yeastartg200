@@ -29,7 +29,7 @@ class SendController
             'contact_number' => $request['contact_number']
         ];
 
-        $return = $this->multiple_sms_module($data);
+        $return = $this->sms_module($data);
 
         $benchmarktime =  microtime(true) -  $this->time_start;
 
@@ -55,7 +55,7 @@ class SendController
         ]);
     }
 
-    public function multiple_sms_module($data)
+    public function sms_module($data)
     {
 
         $debug = 'on';
@@ -111,6 +111,21 @@ class SendController
         return $this->phonenumber_list($threedigitidentifier);
     }
 
+    /* Sim Companies determining Yeastar Module */
+
+    /*
+
+        1. Talk and Text
+        2. Globe
+        3. Touch Mobile
+        4. Smart
+        5. Sun Cellular
+        6. Dito
+        7. Gomo
+        8. Cherry Prepaid
+
+    */
+
     public function phonenumber_list($identifierdigit)
     {
 
@@ -130,5 +145,38 @@ class SendController
         } else {
             return "others";
         }
+    }
+
+    public function bulk_sms(Request $request){
+
+        foreach ($request as $key => $value) {
+
+            $data = [
+                'message' =>  $value['message'],
+                'contact_number' =>  $value['contact_number']
+            ];
+
+            $return = $this->sms_module($data);
+
+            $benchmarktime =  microtime(true) -  $this->time_start;
+
+            SmsLog::create([
+                'reference_id' =>  $value['reference_id'],
+                'message' => $value['message'],
+                'contact_number' => $value['contact_number'],
+                'telco' =>  $return['telco'],
+                'simchannel' => $return['simchannel'],
+                'sent' => $return['success'],
+                'benchmark' => $benchmarktime,
+            ]);
+        }
+
+        $benchmark_outside =  microtime(true) -  $this->time_start;
+
+        return response()->json([
+            'request_done' => true,
+            '_benchmark' =>   $benchmark_outside
+        ]);
+
     }
 }

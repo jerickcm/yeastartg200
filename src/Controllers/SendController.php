@@ -68,10 +68,11 @@ class SendController
         $channel = '1'; // 1 or 2 sim channe 1 and 2 for Yeastar TG200
         $mobilecompany = $this->mobilecompany($SMS_destination);
 
+        // globe in port 1
         if ($mobilecompany == "smart" || $mobilecompany == "sun") {
-            $channel = '2'; //Smart channel
+            $channel = '1'; //Smart channel
         } else {
-            $channel = '2'; //Globe channel
+            $channel = '1'; //Globe channel
         }
 
         $message = $data['message'];

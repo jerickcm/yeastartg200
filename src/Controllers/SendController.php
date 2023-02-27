@@ -70,9 +70,9 @@ class SendController
 
         // globe in port 1
         if ($mobilecompany == "smart" || $mobilecompany == "sun") {
-            $channel = '1'; //Smart channel
+            $channel = '2'; //Smart channel
         } else {
-            $channel = '1'; //Globe channel
+            $channel = '2'; //Globe channel
         }
 
         $message = $data['message'];

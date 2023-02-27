@@ -71,7 +71,7 @@ class SendController
         if ($mobilecompany == "smart" || $mobilecompany == "sun") {
             $channel = '2'; //Smart channel
         } else {
-            $channel = '1'; //Globe channel
+            $channel = '2'; //Globe channel
         }
 
         $message = $data['message'];

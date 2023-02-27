@@ -79,7 +79,8 @@ class SendController
 
         $ch = curl_init();
         $SMS_gateway_password_encoded = curl_escape($ch, $SMS_gateway_password);
-        $SMS_message_encoded = curl_escape($ch, $SMS_message);
+        // $SMS_message_encoded = curl_escape($ch, $SMS_message);
+        $SMS_message_encoded = urlencode( $SMS_message);
         $transmission = "http://" . $SMS_gateway . "/cgi/WebCGI?1500101=account=" . $SMS_gateway_account . "&password=" . $SMS_gateway_password_encoded . "&port=" . $channel . "&destination=" . $SMS_destination . "&content=" . $SMS_message_encoded;
         curl_setopt($ch, CURLOPT_URL, $transmission);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
